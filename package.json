@@ -4,7 +4,11 @@
   "description": "tabnews.com.br clone for study. check it out!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write ."
   },
   "author": "marcos lott <lott.marcos@gmail.com>",
   "license": "MIT",
@@ -14,5 +18,11 @@
     "react-dom": "18.2.0"
   },
   "repository": "git@github.com:lottmarcos/clone-tabnews.git",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "@types/node": "22.6.1",
+    "@types/react": "18.3.8",
+    "prettier": "^3.3.3",
+    "typescript": "5.6.2"
+  }
 }
