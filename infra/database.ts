@@ -1,6 +1,10 @@
 import { Client } from "pg";
 
-async function query(queryObject: string | { text: string; values?: any[] }) {
+async function query(
+  queryObject:
+    | string
+    | { text: string; name?: string; values?: any[]; rowMode?: "array" },
+) {
   const client = new Client({
     host: process.env.POSTGRES_HOST,
     port: parseInt(process.env.POSTGRES_PORT, 10),
@@ -9,11 +13,16 @@ async function query(queryObject: string | { text: string; values?: any[] }) {
     password: process.env.POSTGRES_PASSWORD,
   });
 
-  await client.connect();
-  const result = await client.query(queryObject);
-  await client.end();
-
-  return { result };
+  try {
+    await client.connect();
+    const result = await client.query(queryObject);
+    return result;
+  } catch (error) {
+    console.error("Database query error:", error);
+    throw error;
+  } finally {
+    await client.end();
+  }
 }
 
 export { query };
