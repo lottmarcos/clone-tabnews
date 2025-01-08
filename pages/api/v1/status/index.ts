@@ -11,7 +11,6 @@ const status = async (req: NextApiRequest, res: NextApiResponse) => {
   const max_connections = parseInt(maxConnectionResult.rows[0].max_connections);
 
   const databaseName = req.query.databaseName || process.env.POSTGRES_DB;
-  console.log(`Database name: ${databaseName}`);
   const openedConnectionsResults = await query({
     text: "SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1;",
     values: [databaseName],
@@ -25,8 +24,6 @@ const status = async (req: NextApiRequest, res: NextApiResponse) => {
       database: { version, max_connections, opened_connections },
     },
   };
-
-  console.log(json);
 
   res.status(200).json(json);
 };
