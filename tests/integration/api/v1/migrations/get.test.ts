@@ -6,14 +6,23 @@ describe("GET /api/v1/migrations", () => {
     await clearDatabase();
   });
 
-  it("should GET to /api/v1/migrations should return 200", async () => {
-    const response = await fetch("http://localhost:3000/api/v1/migrations");
-    expect(response.status).toBe(200);
+  it("Validate dryRun is true and migrations is simulated", async () => {
+    const firstResponse = await fetch(
+      "http://localhost:3000/api/v1/migrations",
+    );
+    expect(firstResponse.status).toBe(200);
 
-    query("SELECT 1+1;");
+    const firstBody = await firstResponse.json();
+    expect(Array.isArray(firstBody)).toBeTruthy();
+    expect(firstBody.length).toBeGreaterThan(0);
 
-    const body = await response.json();
-    expect(Array.isArray(body)).toBeTruthy();
-    expect(body.length).toBeGreaterThan(0);
+    const secondResponse = await fetch(
+      "http://localhost:3000/api/v1/migrations",
+    );
+    expect(secondResponse.status).toBe(200);
+
+    const secondBody = await secondResponse.json();
+    expect(Array.isArray(secondBody)).toBeTruthy();
+    expect(secondBody.length).toBeGreaterThan(0);
   });
 });

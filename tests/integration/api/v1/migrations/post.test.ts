@@ -1,16 +1,32 @@
 import { clearDatabase } from "tests/utils";
-
 describe("POST /api/v1/migrations", () => {
   beforeAll(async () => {
     await clearDatabase();
   });
-  it("should post to /api/v1/migrations should return 200", async () => {
-    const response = await fetch("http://localhost:3000/api/v1/migrations", {
-      method: "POST",
-    });
-    expect(response.status).toBe(200);
 
-    const body = await response.json();
-    expect(Array.isArray(body)).toBeTruthy();
+  it("Validate dryRun is false and migrations is actually running", async () => {
+    const firstResponse = await fetch(
+      "http://localhost:3000/api/v1/migrations",
+      {
+        method: "POST",
+      },
+    );
+    expect(firstResponse.status).toBe(200);
+
+    const firstBody = await firstResponse.json();
+    expect(Array.isArray(firstBody)).toBeTruthy();
+    expect(firstBody.length).toBeGreaterThan(0);
+
+    const secondResponse = await fetch(
+      "http://localhost:3000/api/v1/migrations",
+      {
+        method: "POST",
+      },
+    );
+    expect(secondResponse.status).toBe(200);
+
+    const secondBody = await secondResponse.json();
+    expect(Array.isArray(secondBody)).toBeTruthy();
+    expect(secondBody.length).toBe(0);
   });
 });

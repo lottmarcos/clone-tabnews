@@ -10,8 +10,6 @@ const migrations = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const dryRun = req.method === "GET";
 
-  console.log("Running migrations", { dryRun });
-
   const migrations = await node_pg_migration({
     databaseUrl: process.env.DATABASE_URL,
     migrationsTable: "pgmigrations",
