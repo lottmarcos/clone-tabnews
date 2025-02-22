@@ -11,7 +11,7 @@ describe("POST /api/v1/migrations", () => {
         method: "POST",
       },
     );
-    expect(firstResponse.status).toBe(200);
+    expect(firstResponse.status).toBe(201);
 
     const firstBody = await firstResponse.json();
     expect(Array.isArray(firstBody)).toBeTruthy();

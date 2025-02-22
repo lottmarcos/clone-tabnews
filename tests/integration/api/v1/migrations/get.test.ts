@@ -10,7 +10,7 @@ describe("GET /api/v1/migrations", () => {
     const firstResponse = await fetch(
       "http://localhost:3000/api/v1/migrations",
     );
-    expect(firstResponse.status).toBe(200);
+    expect(firstResponse.status).toBe(201);
 
     const firstBody = await firstResponse.json();
     expect(Array.isArray(firstBody)).toBeTruthy();
@@ -19,7 +19,7 @@ describe("GET /api/v1/migrations", () => {
     const secondResponse = await fetch(
       "http://localhost:3000/api/v1/migrations",
     );
-    expect(secondResponse.status).toBe(200);
+    expect(secondResponse.status).toBe(201);
 
     const secondBody = await secondResponse.json();
     expect(Array.isArray(secondBody)).toBeTruthy();

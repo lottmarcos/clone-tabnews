@@ -19,6 +19,8 @@ const migrations = async (req: NextApiRequest, res: NextApiResponse) => {
     verbose: true,
   });
 
+  if (migrations.length > 0) return res.status(201).json(migrations);
+
   res.status(200).json(migrations);
 };
 
