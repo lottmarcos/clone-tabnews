@@ -12,8 +12,8 @@
     "start": "next start",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watchAll --runInBand",
     "migration:create": "node-pg-migrate -m infra/migrations create",
     "migration:up": "node-pg-migrate -m infra/migrations --envPath .env.development up"
   },
@@ -26,15 +26,20 @@
     "node-pg-migrate": "6.2.2",
     "pg": "8.11.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "ts-node": "^10.9.2"
   },
   "repository": "git@github.com:lottmarcos/clone-tabnews.git",
   "private": false,
   "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
     "@types/jest": "^29.5.14",
     "@types/node": "22.6.1",
     "@types/react": "18.3.8",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.5",
     "typescript": "5.6.2"
