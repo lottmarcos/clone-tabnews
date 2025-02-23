@@ -1,10 +1,6 @@
 import { Client } from "pg";
 
-async function query(
-  queryObject:
-    | string
-    | { text: string; name?: string; values?: any[]; rowMode?: "array" },
-) {
+async function getClient() {
   const client = new Client({
     host: process.env.POSTGRES_HOST,
     port: parseInt(process.env.POSTGRES_PORT),
@@ -16,8 +12,20 @@ async function query(
       process.env.NODE_ENV === "production",
   });
 
+  await client.connect();
+
+  return client;
+}
+
+async function query(
+  queryObject:
+    | string
+    | { text: string; name?: string; values?: any[]; rowMode?: "array" },
+) {
+  let client: Client;
+
   try {
-    await client.connect();
+    client = await getClient();
     const result = await client.query(queryObject);
     return result;
   } catch (error) {
@@ -28,4 +36,4 @@ async function query(
   }
 }
 
-export { query };
+export { query, getClient };
