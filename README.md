@@ -20,3 +20,4 @@ To run this project, you will need the following:
 - POSTGRES_DB
 - POSTGRES_PASSWORD
 - POSTGRES_SSLMODE
+- DATABASE_URL
