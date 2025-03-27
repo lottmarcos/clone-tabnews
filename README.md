@@ -1,6 +1,6 @@
-# clone-tabnews
+# App
 
-tabnews.com.br clone for study. check it out!
+Distribuidora MM App
 
 ## requirements
 
@@ -20,4 +20,5 @@ To run this project, you will need the following:
 - POSTGRES_DB
 - POSTGRES_PASSWORD
 - POSTGRES_SSLMODE
+- POSTGRES_POOL_MODE
 - DATABASE_URL

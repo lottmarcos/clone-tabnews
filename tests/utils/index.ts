@@ -1,3 +1,4 @@
-import { clearDatabase } from "./clearDatabase";
+import { clearDatabase } from './clearDatabase';
+import { runMigrations } from './runMigrations';
 
-export { clearDatabase };
+export { clearDatabase, runMigrations };
