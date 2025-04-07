@@ -1,3 +1,3 @@
-import { clearDatabase } from "./clearDatabase";
+import { clearDatabase } from './clearDatabase';
 
 export { clearDatabase };
