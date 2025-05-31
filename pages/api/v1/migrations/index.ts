@@ -13,6 +13,7 @@ const migrations = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const dbClient = await getClient();
+
   const dryRun = req.method === 'GET';
 
   try {

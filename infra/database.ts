@@ -20,7 +20,7 @@ async function getClient() {
 async function query(
   queryObject:
     | string
-    | { text: string; name?: string; values?: any[]; rowMode?: 'array' }
+    | { text: string; name?: string; values?: unknown[]; rowMode?: 'array' }
 ) {
   let client: Client;
 
