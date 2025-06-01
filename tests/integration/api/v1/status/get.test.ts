@@ -1,12 +1,15 @@
-import { clearDatabase } from 'tests/utils';
+import { waitForAllServices } from 'tests/orchestrator';
+import { getApiEndpoint } from 'tests/utils';
 
 describe('GET /api/v1/status', () => {
   beforeAll(async () => {
-    await clearDatabase();
+    await waitForAllServices();
   });
 
+  const apiEndpoint = getApiEndpoint();
+
   it('should GET to /api/v1/status should return 200', async () => {
-    const response = await fetch('http://localhost:3000/api/v1/status');
+    const response = await fetch(`${apiEndpoint}/api/v1/status`);
     expect(response.status).toBe(200);
 
     const body = await response.json();
@@ -29,7 +32,7 @@ describe('GET /api/v1/status', () => {
 
   it('should deal with query params', async () => {
     const result = await fetch(
-      'http://localhost:3000/api/v1/status?databaseName=local_db'
+      `${apiEndpoint}/api/v1/status?databaseName=local_db`
     );
 
     expect(result.status).toBe(200);
