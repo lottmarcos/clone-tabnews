@@ -6,7 +6,7 @@ tabnews.com.br clone for study. check it out!
 
 To run this project, you will need the following:
 
-- Node.js >= 20.0.0
+- Node.js >= 24.0.0 (recomendado: 24.16.0 via `.nvmrc`)
 - npm >= 8.0.0
 - Yarn >= 1.22.22
 - Docker
