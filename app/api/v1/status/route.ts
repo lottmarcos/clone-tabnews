@@ -1,8 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
 import { query } from 'infra/database';
 
-const status = async (req: NextApiRequest, res: NextApiResponse) => {
+export async function GET(request: Request) {
   const now = new Date().toISOString();
 
   const versionResult = await query('SHOW server_version;');
@@ -11,7 +9,10 @@ const status = async (req: NextApiRequest, res: NextApiResponse) => {
   const maxConnectionResult = await query('SHOW max_connections;');
   const maxConnections = parseInt(maxConnectionResult.rows[0].max_connections);
 
-  const databaseName = req.query.databaseName || process.env.POSTGRES_DB;
+  const { searchParams } = new URL(request.url);
+  const databaseName =
+    searchParams.get('databaseName') || process.env.POSTGRES_DB;
+
   const openedConnectionsResults = await query({
     text: 'SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1;',
     values: [databaseName],
@@ -30,7 +31,5 @@ const status = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   };
 
-  res.status(200).json(json);
-};
-
-export default status;
+  return Response.json(json);
+}
